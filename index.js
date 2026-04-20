@@ -10,6 +10,7 @@ app.get('/', (req, res) => {
   res.send(`${obj.message} (Pattern match: ${pattern})`);
 });
 
+// Export a handler function for Vercel
 module.exports = (req, res) => {
   app(req, res);
 };
