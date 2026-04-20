@@ -8,6 +8,9 @@
     "build": "mkdir -p build && cp -r index.js package.json build/ && echo 'Build completed'",
     "test": "echo 'Running tests' && exit 0"
   },
+  "keywords": ["devsecops", "node", "ci-cd"],
+  "author": "Suryansh Mathema",
+  "license": "MIT",
   "dependencies": {
     "express": "4.17.0",
     "lodash": "4.17.11",
