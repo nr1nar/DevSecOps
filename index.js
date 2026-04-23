@@ -5,9 +5,13 @@ const minimatch = require('minimatch');
 const app = express();
 
 app.get('/', (req, res) => {
-  const obj = lodash.cloneDeep({ message: 'Hello, DevSecOps!' });
-  const pattern = minimatch('.js', '.js');
+  const obj = { message: 'Hello, DevSecOps!' };
+  const pattern = minimatch('app.js', '*.js');
   res.send(`${obj.message} (Pattern match: ${pattern})`);
+});
+
+app.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
 });
 
 // Export a handler function for Vercel
