@@ -47,4 +47,4 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # Add in GitHub Secrets
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # Add in GitHub Secrets
           working-directory: ./
-          vercel-args: ‘--prod’
+          vercel-args: --prod
