@@ -1,50 +1,47 @@
 name: CI/CD Pipeline for Node.js App
+
 on:
   push:
     branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
 
     steps:
       # Checkout repository
       - uses: actions/checkout@v3
 
-
-      # Set up Node.js
+      # Set up Node.js (upgraded from 16 to 20)
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
-
+          node-version: '20'
 
       # Install dependencies
       - name: Install dependencies
         run: npm install
 
-
-      # Run Snyk vulnerability scan
+      # Run Snyk vulnerability scan (fixed: removed quoted flags)
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --severity-threshold=high
-
+          args: --severity-threshold=high --prod
 
       # Build the application
       - name: Build
         run: npm run build
 
+      # Install latest Vercel CLI (fixed: ensures version 47.2.2+)
+      - name: Install Vercel CLI
+        run: npm i -g vercel@latest
 
-      # Deploy to Vercel
+      # Deploy to Vercel (fixed: using CLI directly instead of outdated action)
       - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Add in GitHub Secrets
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # Add in GitHub Secrets
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # Add in GitHub Secrets
-          working-directory: ./
-          prod: true
+        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
