@@ -5,7 +5,7 @@ const minimatch = require('minimatch');
 const app = express();
 
 app.get('/', (req, res) => {
-  const obj = { message: 'Hello, DevSecOps!' };
+  const obj = { message: 'Hello, DevSecOps STUDENTS!' };
   const pattern = minimatch('app.js', '*.js');
   res.send(`${obj.message} (Pattern match: ${pattern})`);
 });
