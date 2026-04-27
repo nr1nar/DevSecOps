@@ -13,8 +13,8 @@
     "node",
     "ci-cd"
   ],
-  "author": "Suryansh Mathema",
-  "license": "MIT",
+  "author": "Group 3 DevSecOps",
+  "license": "Kingscollege",
   "dependencies": {
     "express": "4.22.0",
     "lodash": "4.18.1",
